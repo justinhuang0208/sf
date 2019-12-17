@@ -108,7 +108,10 @@ class FindNewToken(object):
             #     if len(key)!= 1:  
             #         f.write(key+'\n')
             for sent,token in self.pairs:
-                print(sent)
+                if token:
+                    for word in token:
+                        f.write(word+'\n')
+
                 # for l in token:
                 #     if l:
                 #         for word in l:

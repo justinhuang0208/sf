@@ -32,3 +32,4 @@ ckip/data/model_ws/model_asbc_Att-0_BiLSTM-cross-2-500_batch128-run1.index
 ckip/data/model_ws/model_asbc_Att-0_BiLSTM-cross-2-500_batch128-run1.meta
 
 dict.txt
+output.txt

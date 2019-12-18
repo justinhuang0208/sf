@@ -107,6 +107,7 @@ class FindNewToken(object):
         with open('new_dict.txt') as f:
             oridict = f.readlines()
         with open(self.write_path,'w',encoding='utf-8') as f:
+<<<<<<< HEAD:find_new_word.py
             for token in self.pairs:
                 if token:
                     for word in token:
@@ -114,6 +115,16 @@ class FindNewToken(object):
                             f.write(word+'\n')
                             count += 1
         print('new words: ',count)
+=======
+            # for key in tqdm(self.new_word):
+            #     if len(key)!= 1:  
+            #         f.write(key+'\n')
+            for sent,token in self.pairs:
+                f.write(sent+','+','.join(token)+'\n')
+    
+
+
+>>>>>>> dd8d6720f09185704e0cbc4804eb782ca6d0c289:new_words/find_new_word.py
 
 if __name__ =='__main__':
     txt_path = r'input.txt'

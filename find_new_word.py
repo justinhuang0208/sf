@@ -3,8 +3,9 @@ import numpy as np
 from tqdm import tqdm
 import re
 class FindNewToken(object):
-    def __init__(self,txt_path,write_path = r'output.txt',min_count=25,token_length=4,min_proba={2:5,3:25,4:125}):
+    def __init__(self,txt_path,write_path,min_count=25,token_length=4,min_proba={2:5,3:25,4:125}):
         self.txt_path = txt_path
+        self.write_path = write_path
         self.min_count = min_count
         self.token_length = token_length
         self.min_proba = min_proba
@@ -95,6 +96,7 @@ class FindNewToken(object):
         
         self.new_word = {k:v for k,v in self.all_tokens.items() if self.is_real(k)}
     
+
     def statistic_token(self):#统计发现的新词的个数
         count = defaultdict(int)
         length = list(map(lambda x:len(x),self.new_word.keys()))
@@ -104,15 +106,23 @@ class FindNewToken(object):
         
                 
     def write(self):
+        count = 0
+        repeatWords = []
+        readyToWrite = []
         with open(self.write_path,'w',encoding='utf-8') as f:
-            # for key in tqdm(self.new_word):
-            #     if len(key)!= 1:  
-            #         f.write(key+'\n')
             for sent,token in self.pairs:
-                    for words in token:
-                        f.write(words+'\n')
-
+                if token:
+                    for item in token:
+                        repeatWords.append(item)
+            for item in repeatWords:
+                if not item in readyToWrite:
+                    readyToWrite.append(item)
+            for word in readyToWrite:
+                f.write(word+'\n')
+                count += 1
+        print(count)
 if __name__ =='__main__':
-    txt_path = r'input.txt'
-    findtoken = FindNewToken(txt_path)
-    findtoken.statistic_token()
+    txt_path = 'input.txt'
+    write_path = 'output.txt'
+    findtoken = FindNewToken(txt_path, write_path)
+    # findtoken.statistic_token()
